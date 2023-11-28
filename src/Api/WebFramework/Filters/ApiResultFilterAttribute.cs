@@ -20,7 +20,6 @@ namespace WebFramework.Filters
                 var apiResult = new ApiResult(true, ApiResultStatusCode.Success);
                 context.Result = new JsonResult(apiResult) { StatusCode = okResult.StatusCode };
             }
-            //return BadRequest() method create an ObjectResult with StatusCode 400 in recent versions, So the following code has changed a bit.
             else if (context.Result is ObjectResult badRequestObjectResult && badRequestObjectResult.StatusCode == 400)
             {
                 string message = null;
@@ -48,7 +47,6 @@ namespace WebFramework.Filters
                 if (notFoundObjectResult.Value != null && !(notFoundObjectResult.Value is ProblemDetails))
                     message = notFoundObjectResult.Value.ToString();
 
-                //var apiResult = new ApiResult<object>(false, ApiResultStatusCode.NotFound, notFoundObjectResult.Value);
                 var apiResult = new ApiResult(false, ApiResultStatusCode.NotFound, message);
                 context.Result = new JsonResult(apiResult) { StatusCode = notFoundObjectResult.StatusCode };
             }

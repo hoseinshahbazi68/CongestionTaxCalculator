@@ -9,7 +9,7 @@ namespace Entities.Vehicle
     /// وسیله های رایگان براساس شهر در این جدول قرار میگرند 
     /// </summary>
     [Table("TollFreeVehicle")]
-    public class TollFreeVehicleEntity:IEntity
+    public class TollFreeVehicleEntity : IEntity
     {
         #region لیست فیلد ها
 

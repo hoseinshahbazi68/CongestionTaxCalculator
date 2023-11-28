@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Common
+﻿namespace Common
 {
     public class SiteSettings
     {
@@ -9,9 +7,6 @@ namespace Common
         public JwtSettings JwtSettings { get; set; }
         public Identity Identity { get; set; }
         public IdentitySettings IdentitySettings { get; set; }
-        public List<string> PasswordsBanList { get; set; }
-        public List<string> EmailsBanList { get; set; }
-        public List<string> UsernameBanList { get; set; }
     }
 
     public class IdentitySettings

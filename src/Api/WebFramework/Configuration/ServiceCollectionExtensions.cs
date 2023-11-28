@@ -1,9 +1,6 @@
 ﻿using Common;
 using Common.Exceptions;
 using Data;
-using EFCoreSecondLevelCacheInterceptor;
-using ElmahCore.Mvc;
-using ElmahCore.Sql;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Authorization;
@@ -52,14 +49,6 @@ namespace WebFramework.Configuration
 
         }
 
-        public static void AddElmah(this IServiceCollection services, IConfiguration configuration, SiteSettings siteSetting)
-        {
-            services.AddElmah<SqlErrorLog>(options =>
-            {
-                options.Path = siteSetting.ElmahPath;
-                options.ConnectionString = configuration.GetConnectionString("Elmah");
-            });
-        }
 
         public static void AddJwtAuthentication(this IServiceCollection services, JwtSettings jwtSettings)
         {
@@ -161,13 +150,6 @@ namespace WebFramework.Configuration
             });
         }
 
-        public static void AddSecondLevelCache(this IServiceCollection services, SiteSettings siteSetting)
-        {
-            services.AddEFSecondLevelCache(options =>
-            {
-                options.UseMemoryCacheProvider().DisableLogging(true);
-                options.CacheAllQueries(CacheExpirationMode.Absolute, TimeSpan.FromMinutes(siteSetting.SecondLevelCache));
-            });
-        }
+
     }
 }

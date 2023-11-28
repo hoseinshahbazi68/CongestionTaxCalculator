@@ -1,15 +1,9 @@
 ﻿using Entities.Vehicle;
 using Models.Base;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Models.Models
 {
-    public class ListCityConfigDto : BaseDto<ListCityConfigDto,  CityConfigEntity>
+    public class ListCityConfigDto : BaseDto<ListCityConfigDto, CityConfigEntity>
     {
         #region لیست فیلد ها
 

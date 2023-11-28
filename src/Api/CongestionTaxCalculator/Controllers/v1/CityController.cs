@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Repositories.City;
-using Repositories.TollFreeVehicle;
 using WebFramework.Api;
 
 namespace CongestionTaxCalculator.Controllers.v1

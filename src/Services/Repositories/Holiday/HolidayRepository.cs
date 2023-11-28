@@ -6,7 +6,6 @@ using Entities.Vehicle;
 using Microsoft.EntityFrameworkCore;
 using Models.Models;
 using Repositories.Base;
-using Repositories.City;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

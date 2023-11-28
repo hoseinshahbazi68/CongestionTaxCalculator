@@ -40,10 +40,6 @@ namespace TebCongestionTaxCalculator
 
             services.AddMinimalMvc();
 
-
-
-            // services.InitGraphQl();
-
             services.AddJwtAuthentication(_siteSetting.JwtSettings);
 
             services.AddCustomApiVersioning();
@@ -60,7 +56,6 @@ namespace TebCongestionTaxCalculator
 
 
 
-            services.AddSecondLevelCache(_siteSetting);
 
 
             services.AddSingleton<Microsoft.AspNetCore.Http.IHttpContextAccessor, Microsoft.AspNetCore.Http.HttpContextAccessor>();

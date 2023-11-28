@@ -22,11 +22,6 @@ public static class SwaggerConfigurationExtensions
         Assert.NotNull(services, nameof(services));
 
         #region AddSwaggerExamples
-        //Add services to use Example Filters in swagger
-        //If you want to use the Request and Response example filters (and have called options.ExampleFilters() above), then you MUST also call
-        //This method to register all ExamplesProvider classes form the assembly
-        //services.AddSwaggerExamplesFromAssemblyOf<PersonRequestExample>();
-
         //We call this method for by reflection with the Startup type of entry assembly (CongestionTaxCalculator assembly)
         var mainAssembly = Assembly.GetEntryAssembly(); // => CongestionTaxCalculator project assembly
         var mainType = mainAssembly.GetExportedTypes()[0];
@@ -47,31 +42,7 @@ public static class SwaggerConfigurationExtensions
 
             options.EnableAnnotations();
 
-            #region DescribeAllEnumsAsStrings
-            //This method was Deprecated. 
-            ///hhhhhhhhhhhhhhhhhhhhhhhhh
-            //  options.DescribeAllEnumsAsStrings();
 
-            //You can specify an enum to convert to/from string, using :
-            //[JsonConverter(typeof(StringEnumConverter))]
-            //public virtual MyEnums MyEnum { get; set; }
-
-            //Or can apply the StringEnumConverter to all enums globally, using :
-            //SerializerSettings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
-            //OR
-            //JsonConvert.DefaultSettings = () =>
-            //{
-            //    var settings = new JsonSerializerSettings();
-            //    settings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
-            //    return settings;
-            //};
-            #endregion
-
-            //options.DescribeAllParametersInCamelCase();
-            //options.DescribeStringEnumsInCamelCase()
-            //options.UseReferencedDefinitionsForEnums()
-            //options.IgnoreObsoleteActions();
-            //options.IgnoreObsoleteProperties();
 
             options.SwaggerDoc("v1", new OpenApiInfo
             {
@@ -81,59 +52,26 @@ public static class SwaggerConfigurationExtensions
                 TermsOfService = new Uri("http://test.com"),
                 Contact = new OpenApiContact
                 {
-                    Name = "Hossein SHahbazi",
+                    Name = "Hossein Shahbazi",
                     Email = "Hoseinshahbazi29@gmail.com",
                     Url = new Uri("http://test.com"),
                 }
             });
 
             #region Filters
-            //Enable to use [SwaggerRequestExample] & [SwaggerResponseExample]
             options.ExampleFilters();
 
-            //It doesn't work anymore in recent versions because of replacing Swashbuckle.AspNetCore.Examples with Swashbuckle.AspNetCore.Filters
-            //Adds an Upload button to endpoints which have [AddSwaggerFileUploadButton]
-            //options.OperationFilter<AddFileParamTypesOperationFilter>();
-
-            //Set summary of action if not already set
             options.OperationFilter<ApplySummariesOperationFilter>();
 
             #region Add UnAuthorized to Response
-            //Add 401 response and security requirements (Lock icon) to actions that need authorization
             options.OperationFilter<UnauthorizedResponsesOperationFilter>(true, "OAuth2");
             #endregion
 
             #region Add Jwt Authentication
-            //Add Lockout icon on top of swagger ui page to authenticate
-            #region Old way
-            //options.AddSecurityDefinition("Bearer", new ApiKeyScheme
-            //{
-            //    Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
-            //    Name = "Authorization",
-            //    In = "header"
-            //});
-            //options.AddSecurityRequirement(new Dictionary<string, IEnumerable<string>>
-            //{
-            //    {"Bearer", new string[] { }}
-            //});
-            #endregion
-
-            //options.AddSecurityRequirement(new OpenApiSecurityRequirement
-            //{
-            //    {
-            //        new OpenApiSecurityScheme
-            //        {
-            //            Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "OAuth2" }
-            //        },
-            //        Array.Empty<string>() //new[] { "readAccess", "writeAccess" }
-            //    }
-            //});
 
             //OAuth2Scheme
             options.AddSecurityDefinition("OAuth2", new OpenApiSecurityScheme
             {
-                //Scheme = "Bearer",
-                //In = ParameterLocation.Header,
                 Type = SecuritySchemeType.OAuth2,
                 Flows = new OpenApiOAuthFlows
                 {
@@ -165,8 +103,6 @@ public static class SwaggerConfigurationExtensions
             });
             #endregion
 
-            //If use FluentValidation then must be use this package to show validation in swagger (MicroElements.Swashbuckle.FluentValidation)
-            //options.AddFluentValidationRules();
             #endregion
         });
     }
@@ -177,13 +113,12 @@ public static class SwaggerConfigurationExtensions
 
         app.UseSwagger(options =>
         {
-            //options.RouteTemplate = "api-docs/{documentName}/swagger.json";
         });
 
         //Swagger middleware for generate UI from swagger.json
         app.UseSwaggerUI(options =>
         {
-            options.SwaggerEndpoint("/swagger/v1/swagger.json", "V1 Docs");
+            options.SwaggerEndpoint("/swagger/v1/swagger.json", "CongestionTaxCalculator V1 Docs");
             options.RoutePrefix = "swagger";
 
             #region Customizing
@@ -211,31 +146,5 @@ public static class SwaggerConfigurationExtensions
             #endregion
         });
 
-        //ReDoc UI middleware. ReDoc UI is an alternative to swagger-ui
-        app.UseReDoc(options =>
-        {
-            // options.SpecUrl("/swagger/v1/swagger.json");
-            options.SpecUrl("/swagger/v2/swagger.json");
-
-            #region Customizing
-            //By default, the ReDoc UI will be exposed at "/api-docs"
-            //options.RoutePrefix = "docs";
-            //options.DocumentTitle = "My API Docs";
-
-            options.EnableUntrustedSpec();
-            options.ScrollYOffset(10);
-            options.HideHostname();
-            options.HideDownloadButton();
-            options.ExpandResponses("200,201");
-            options.RequiredPropsFirst();
-            options.NoAutoAuth();
-            options.PathInMiddlePanel();
-            options.HideLoading();
-            options.NativeScrollbars();
-            options.DisableSearch();
-            options.OnlyRequiredInSamples();
-            options.SortPropsAlphabetically();
-            #endregion
-        });
     }
 }

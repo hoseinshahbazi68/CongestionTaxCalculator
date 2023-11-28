@@ -6,9 +6,7 @@ using Entities.Vehicle;
 using Microsoft.EntityFrameworkCore;
 using Models.Models;
 using Repositories.Base;
-using Repositories.Holiday;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Repositories.City
@@ -24,6 +22,6 @@ namespace Repositories.City
         /// </summary>
         /// <returns></returns>
         public async Task<List<ListCityDto>> GetAllAsync() => await TableNoTracking.ProjectTo<ListCityDto>(Mapper.ConfigurationProvider).ToListAsync();
-        
+
     }
 }
