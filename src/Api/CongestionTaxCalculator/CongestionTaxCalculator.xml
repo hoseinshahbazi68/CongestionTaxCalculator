@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CongestionTaxCalculator</name>
+    </assembly>
+    <members>
+        <member name="T:CongestionTaxCalculator.Controllers.v1.CityController">
+            <summary>
+            شهرها
+             </summary>
+        </member>
+        <member name="M:CongestionTaxCalculator.Controllers.v1.CityController.Get">
+            <summary>
+            گرفتن لیست شهرها
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:CongestionTaxCalculator.Controllers.v1.CongestionTaxCalculatorController">
+            <summary>
+            محاسبه مالیات
+            </summary>
+        </member>
+        <member name="M:CongestionTaxCalculator.Controllers.v1.CongestionTaxCalculatorController.Get(System.Int32)">
+            <summary>
+            گرفتن مالیات وسایل نقلیه
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:CongestionTaxCalculator.Controllers.v1.TollFreeVehicleController">
+            <summary>
+              وسایل نقلیه رایگان
+             </summary>
+        </member>
+        <member name="M:CongestionTaxCalculator.Controllers.v1.TollFreeVehicleController.Get(System.Int32)">
+            <summary>
+            گرفتن لیست وسایل نقلیه نقلیه رایگان
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:CongestionTaxCalculator.Controllers.v1.VehicleController">
+            <summary>
+              وسایل نقلیه
+             </summary>
+        </member>
+        <member name="M:CongestionTaxCalculator.Controllers.v1.VehicleController.Get">
+            <summary>
+            گرفتن لیست وسایل نقلیه
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
