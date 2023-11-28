@@ -26,40 +26,11 @@ namespace Data
         {
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            base.OnConfiguring(optionsBuilder);
-
-            // We add AddHours Method replacement to call function DayOfWeekImpl.
-            optionsBuilder.UseMemberReplacement((DateTime d) => d.DayOfWeek,
-                d => (DayOfWeek)(DayOfWeekImpl(d) - 1));
-
-            // We add DayOfWeek method replacement to call function DateAddHoursImpl.
-            optionsBuilder.UseMemberReplacement((DateTime d, double hours) => d.AddHours(hours),
-                (d, hours) => DateAddHoursImpl(d, hours));
-        }
-
-        static int DayOfWeekImpl(DateTime date) => (int)date.DayOfWeek;
-
-        static DateTime DateAddHoursImpl(DateTime date, double hours) => date.AddHours(hours);
-
-
+        
 
         protected override void OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
-
-            modelBuilder.HasDbFunction(() => DayOfWeekImpl(default))
-                  .HasTranslation(args =>
-                      new SqlFunctionExpression("DATEPART",
-                          new[] { new SqlFragmentExpression("weekday"), args[0] },
-                          false,
-                          new[] { false, false, false },
-                          typeof(int),
-                          null
-                      ));
-
 
             var entitiesAssembly = typeof(IEntity).Assembly;
 
