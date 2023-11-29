@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Services.DataInitializer;
 
 namespace WebFramework.Configuration
 {
@@ -24,6 +25,9 @@ namespace WebFramework.Configuration
 
             var dbContext = scope.ServiceProvider.GetService<ApplicationDbContext>(); //Service locator
             dbContext.Database.EnsureCreated();
+            var dataInitializes = scope.ServiceProvider.GetServices<IDataInitializer>();
+            foreach (var dataInitializer in dataInitializes)
+                dataInitializer.InitializeData();
         }
     }
 }

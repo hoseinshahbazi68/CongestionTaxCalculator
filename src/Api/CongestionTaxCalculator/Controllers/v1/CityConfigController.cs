@@ -24,7 +24,7 @@ namespace CongestionTaxCalculator.Controllers.v1
         /// گرفتن لیست تنظیمات شهرها
         /// </summary>
         /// <returns></returns>
-        [HttpPost("Get")]
+        [HttpPost]
         public async Task<object> Get() => await _CityConfigRepository.GetAllAsync();
     }
 }

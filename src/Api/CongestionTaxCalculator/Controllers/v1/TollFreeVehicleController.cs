@@ -23,7 +23,7 @@ namespace CongestionTaxCalculator.Controllers.v1
         /// گرفتن لیست وسایل نقلیه نقلیه رایگان
         /// </summary>
         /// <returns></returns>
-        [HttpPost("Get/{CityId:int}")]
+        [HttpPost("{CityId:int}")]
         public async Task<object> Get(int CityId) => await _tollFreeVehiclRepository.GetAllAsync();
     }
 }

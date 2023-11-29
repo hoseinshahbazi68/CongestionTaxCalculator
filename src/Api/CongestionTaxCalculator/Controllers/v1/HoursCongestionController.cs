@@ -24,7 +24,7 @@ namespace CongestionTaxCalculator.Controllers.v1
         /// گرفتن لیست   ساعت ازدحام
         /// </summary>
         /// <returns></returns>
-        [HttpPost("Get")]
+        [HttpPost]
         public async Task<object> Get() => await _HoursCongestionRepository.GetAllAsync();
     }
 }

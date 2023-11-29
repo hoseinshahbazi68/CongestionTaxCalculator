@@ -21,8 +21,8 @@
 
         //public int ModifiedUserId { get; set; }
         //public DateTime ModifiedDate { get; set; }
-        public int VersionStatus { get; set; }
-        public int Version { get; set; }
+        public int VersionStatus { get; set; } = 1;
+        public int Version { get; set; } = 1;
 
     }
 

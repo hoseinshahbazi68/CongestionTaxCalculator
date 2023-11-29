@@ -24,7 +24,7 @@ namespace CongestionTaxCalculator.Controllers.v1
         /// گرفتن لیست   تعطیلات
         /// </summary>
         /// <returns></returns>
-        [HttpPost("Get")]
+        [HttpPost]
         public async Task<object> Get() => await _HolidayRepository.GetAllAsync();
     }
 }

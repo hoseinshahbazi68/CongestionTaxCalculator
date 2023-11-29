@@ -50,20 +50,25 @@ namespace Repositories.TaxCalculator
 
                 x.CityId == CityId
 
-                 && (CityConfig.IsCheckHoliday ? !_Holiday.TableNoTracking.Any(h => h.Date == x.Date)
-                  : true)
+                 && (CityConfig.IsCheckHoliday ? !_Holiday.TableNoTracking.Any(h => h.Date == x.Date) : true)
 
                  && (CityConfig.IsCheckTollFreeVehicle ? !_tollFreeVehicleRepository.TableNoTracking.Any(tfv => tfv.CityId == x.CityId && tfv.VehicleId == x.VehicleId) : true)
 
-                ).GroupBy(x => x.VehicleId)
-                .Select(x => new ListCommutingReportDto()
+                ).OrderBy(x => x.Date).GroupBy(x => x.VehicleId)
+                .Select(x => new
                 {
                     Title = x.First().Vehicle.Title,
-                    Fee = GetTax(x.Select(d => d.Date).ToArray(), HoursCongestion, CityConfig.IsCheckHoliday)
-                }).ToListAsync();
+                    Days = x.Select(d => d.Date).ToArray(),
+                })
+                .ToListAsync();
 
+            var dataout = data.Select(x => new ListCommutingReportDto()
+            {
+                Fee = GetTax(x.Days, HoursCongestion, CityConfig.IsCheckHoliday),
+                Title = x.Title
+            }).ToList();
 
-            return data;
+            return dataout;
         }
 
 
@@ -82,11 +87,17 @@ namespace Repositories.TaxCalculator
             {
                 double nextFee = 0;
                 double tempFee = 0;
-                if (!IsCheckHoliday && !dayOfWeeks.Any(d => d == date.DayOfWeek))
+
+                if (IsCheckHoliday && dayOfWeeks.Any(d => d == date.DayOfWeek))
+                    nextFee = 0;
+                else
                     nextFee = GetTollFee(date, HoursCongestions);
 
-                if (!IsCheckHoliday && !dayOfWeeks.Any(d => d == intervalStart.DayOfWeek))
+                if (IsCheckHoliday && dayOfWeeks.Any(d => d == intervalStart.DayOfWeek))
+                    tempFee = 0;
+                else
                     tempFee = GetTollFee(intervalStart, HoursCongestions);
+
 
                 double minutes = (date - intervalStart).TotalMinutes;
 

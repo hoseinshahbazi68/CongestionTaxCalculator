@@ -23,7 +23,7 @@ namespace CongestionTaxCalculator.Controllers.v1
         /// گرفتن لیست وسایل نقلیه
         /// </summary>
         /// <returns></returns>
-        [HttpPost("Get")]
+        [HttpPost]
         public async Task<object> Get() => await _vehicleRepository.GetAllAsync();
 
     }
