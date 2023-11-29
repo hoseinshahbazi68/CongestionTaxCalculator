@@ -24,6 +24,6 @@ namespace CongestionTaxCalculator.Controllers.v1
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public async Task<object> Get() => await _CityRepository.GetAllAsync();
+        public async Task<object> Get(CancellationToken cancellation) => await _CityRepository.GetAllAsync(cancellation);
     }
 }

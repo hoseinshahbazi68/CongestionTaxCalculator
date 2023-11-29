@@ -9,7 +9,7 @@
             تنظیمات شهرها
              </summary>
         </member>
-        <member name="M:CongestionTaxCalculator.Controllers.v1.CityConfigController.Get">
+        <member name="M:CongestionTaxCalculator.Controllers.v1.CityConfigController.Get(System.Threading.CancellationToken)">
             <summary>
             گرفتن لیست تنظیمات شهرها
             </summary>
@@ -20,7 +20,7 @@
             شهرها
              </summary>
         </member>
-        <member name="M:CongestionTaxCalculator.Controllers.v1.CityController.Get">
+        <member name="M:CongestionTaxCalculator.Controllers.v1.CityController.Get(System.Threading.CancellationToken)">
             <summary>
             گرفتن لیست شهرها
             </summary>
@@ -31,7 +31,7 @@
             محاسبه مالیات
             </summary>
         </member>
-        <member name="M:CongestionTaxCalculator.Controllers.v1.CongestionTaxCalculatorController.Get(System.Int32)">
+        <member name="M:CongestionTaxCalculator.Controllers.v1.CongestionTaxCalculatorController.Get(System.Int32,System.Threading.CancellationToken)">
             <summary>
             گرفتن مالیات وسایل نقلیه
             </summary>
@@ -42,7 +42,7 @@
             تعطیلات  
              </summary>
         </member>
-        <member name="M:CongestionTaxCalculator.Controllers.v1.HolidayController.Get">
+        <member name="M:CongestionTaxCalculator.Controllers.v1.HolidayController.Get(System.Threading.CancellationToken)">
             <summary>
             گرفتن لیست   تعطیلات
             </summary>
@@ -53,7 +53,7 @@
             ساعت ازدحام  
              </summary>
         </member>
-        <member name="M:CongestionTaxCalculator.Controllers.v1.HoursCongestionController.Get">
+        <member name="M:CongestionTaxCalculator.Controllers.v1.HoursCongestionController.Get(System.Threading.CancellationToken)">
             <summary>
             گرفتن لیست   ساعت ازدحام
             </summary>
@@ -64,7 +64,7 @@
               وسایل نقلیه رایگان
              </summary>
         </member>
-        <member name="M:CongestionTaxCalculator.Controllers.v1.TollFreeVehicleController.Get(System.Int32)">
+        <member name="M:CongestionTaxCalculator.Controllers.v1.TollFreeVehicleController.Get(System.Int32,System.Threading.CancellationToken)">
             <summary>
             گرفتن لیست وسایل نقلیه نقلیه رایگان
             </summary>
@@ -75,7 +75,7 @@
               وسایل نقلیه
              </summary>
         </member>
-        <member name="M:CongestionTaxCalculator.Controllers.v1.VehicleController.Get">
+        <member name="M:CongestionTaxCalculator.Controllers.v1.VehicleController.Get(System.Threading.CancellationToken)">
             <summary>
             گرفتن لیست وسایل نقلیه
             </summary>

@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Models.Models;
 using Repositories.Base;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Repositories.CityConfig
@@ -21,7 +22,7 @@ namespace Repositories.CityConfig
         /// گرفتن لیست تنظیمات  
         /// </summary>
         /// <returns></returns>
-        public async Task<List<ListCityConfigDto>> GetAllAsync() => await TableNoTracking.ProjectTo<ListCityConfigDto>(Mapper.ConfigurationProvider).ToListAsync();
+        public async Task<List<ListCityConfigDto>> GetAllAsync(CancellationToken cancellation) => await TableNoTracking.ProjectTo<ListCityConfigDto>(Mapper.ConfigurationProvider).ToListAsync(cancellation);
 
     }
 }

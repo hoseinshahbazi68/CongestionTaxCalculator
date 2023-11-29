@@ -2,6 +2,7 @@
 using Models.Models;
 using Repositories.Base;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Repositories.Vehicle
@@ -15,6 +16,6 @@ namespace Repositories.Vehicle
         /// گرفتن لیست وسایل نقلیه
         /// </summary>
         /// <returns></returns>
-        Task<List<ListVehicleDto>> GetAllAsync();
+        Task<List<ListVehicleDto>> GetAllAsync(CancellationToken cancellation);
     }
 }

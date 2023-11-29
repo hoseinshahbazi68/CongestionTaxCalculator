@@ -7,6 +7,7 @@ using Models.Models;
 using Repositories.Base;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Repositories.TollFreeVehicle
@@ -23,9 +24,9 @@ namespace Repositories.TollFreeVehicle
         /// گرفتن لیست وسایل نقلیه رایگان
         /// </summary>
         /// <returns></returns>
-        public async Task<List<ListTollFreeVehicleDto>> GetAllAsync()
+        public async Task<List<ListTollFreeVehicleDto>> GetAllAsync(int CityId,CancellationToken cancellation )
         {
-            return await TableNoTracking.Select(x => new ListTollFreeVehicleDto() { CityId = x.CityId, VehicleId = x.VehicleId }).ToListAsync();
+            return await TableNoTracking.Where(x=>x.CityId== CityId).Select(x => new ListTollFreeVehicleDto() { CityId = x.CityId, VehicleId = x.VehicleId }).ToListAsync(cancellation);
         }
     }
 }

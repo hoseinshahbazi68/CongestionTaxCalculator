@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Models.Models;
 using Repositories.Base;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Repositories.Vehicle
@@ -21,7 +22,7 @@ namespace Repositories.Vehicle
         /// گرفتن لیست وسایل نقلیه
         /// </summary>
         /// <returns></returns>
-        public async Task<List<ListVehicleDto>> GetAllAsync() => await TableNoTracking.ProjectTo<ListVehicleDto>(Mapper.ConfigurationProvider).ToListAsync();
+        public async Task<List<ListVehicleDto>> GetAllAsync(CancellationToken cancellation) => await TableNoTracking.ProjectTo<ListVehicleDto>(Mapper.ConfigurationProvider).ToListAsync(cancellation);
 
     }
 }

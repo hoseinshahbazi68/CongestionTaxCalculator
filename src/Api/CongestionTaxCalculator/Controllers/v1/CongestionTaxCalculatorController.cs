@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Models.Base;
+using Models.Models;
 using Repositories.TaxCalculator;
 using WebFramework.Api;
 
@@ -24,6 +26,6 @@ namespace CongestionTaxCalculator.Controllers.v1
         /// </summary>
         /// <returns></returns>
         [HttpPost("{CityId:int}")]
-        public async Task<object> Get(int CityId) => await _congestionTaxCalculatorRepository.GetAllAsync(CityId);
+        public async Task<ApiResult<List<ListCommutingReportDto>>> Get(int CityId, CancellationToken cancellation) => await _congestionTaxCalculatorRepository.GetAllAsync(CityId, cancellation);
     }
 }

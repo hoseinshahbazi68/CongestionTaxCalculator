@@ -2,6 +2,7 @@
 using Models.Models;
 using Repositories.Base;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Repositories.City
@@ -12,7 +13,7 @@ namespace Repositories.City
         /// گرفتن لیست شهرها
         /// </summary>
         /// <returns></returns>
-        Task<List<ListCityDto>> GetAllAsync();
+        Task<List<ListCityDto>> GetAllAsync(CancellationToken cancellation);
 
     }
 }

@@ -2,6 +2,7 @@
 using Models.Models;
 using Repositories.Base;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Repositories.Holiday
@@ -12,7 +13,7 @@ namespace Repositories.Holiday
         /// گرفتن لیست   تعطیلات
         /// </summary>
         /// <returns></returns>
-        Task<List<ListHolidayDto>> GetAllAsync();
+        Task<List<ListHolidayDto>> GetAllAsync(CancellationToken cancellation);
 
     }
 }

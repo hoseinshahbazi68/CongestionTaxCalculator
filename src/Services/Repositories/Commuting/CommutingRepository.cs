@@ -13,11 +13,12 @@ using Repositories.TollFreeVehicle;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Repositories.TaxCalculator
 {
-    public class CommutingRepository : Repository<CommutingEntity>, ICommutingRepository, IScopedDependency
+    public class CommutingRepository : Repository<CommutingEntity>, ICommutingRepository, IScopedDependency 
     {
 
         private readonly ICityConfigRepository _CityConfig;
@@ -35,14 +36,17 @@ namespace Repositories.TaxCalculator
             _HoursCongestion = HoursCongestion;
             _tollFreeVehicleRepository = tollFreeVehicleRepository;
         }
-
-        public async Task<ApiResult<List<ListCommutingReportDto>>> GetAllAsync(int CityId)
+        /// <summary>
+        /// محاسبه مالیات
+        /// </summary>
+        /// <returns></returns>
+        public async Task<ApiResult<List<ListCommutingReportDto>>> GetAllAsync(int CityId, CancellationToken cancellation)
         {
-            var CityConfig = await _CityConfig.TableNoTracking.SingleOrDefaultAsync(x => x.CityId.Equals(CityId));
+            var CityConfig = await _CityConfig.TableNoTracking.SingleOrDefaultAsync(x => x.CityId.Equals(CityId), cancellation);
             if (CityConfig is null)
                 return new ApiResult<List<ListCommutingReportDto>>(false, ApiResultStatusCode.NotFound, null, "تنظیمات شهر یافت نشد");
 
-            var HoursCongestion = await _HoursCongestion.TableNoTracking.Where(x => x.CityId == CityId).ToListAsync();
+            var HoursCongestion = await _HoursCongestion.TableNoTracking.Where(x => x.CityId == CityId).ToListAsync(cancellation);
 
 
             var data = await TableNoTracking
@@ -60,7 +64,7 @@ namespace Repositories.TaxCalculator
                     Title = x.First().Vehicle.Title,
                     Days = x.Select(d => d.Date).ToArray(),
                 })
-                .ToListAsync();
+                .ToListAsync(cancellation);
 
             var dataout = data.Select(x => new ListCommutingReportDto()
             {
@@ -75,7 +79,7 @@ namespace Repositories.TaxCalculator
 
 
         ///دریافت مالیات
-        public double GetTax(DateTime[] dates, List<HoursCongestionEntity> HoursCongestions, bool IsCheckHoliday)
+        private double GetTax(DateTime[] dates, List<HoursCongestionEntity> HoursCongestions, bool IsCheckHoliday)
         {
             if (dates.Length == 0)
                 return 0;
@@ -122,7 +126,7 @@ namespace Repositories.TaxCalculator
         /// <param name="date"></param>
         /// <param name="vehicle"></param>
         /// <returns></returns>
-        public double GetTollFee(DateTime date, List<HoursCongestionEntity> HoursCongestions)
+        private double GetTollFee(DateTime date, List<HoursCongestionEntity> HoursCongestions)
         {
             TimeSpan Time = date.TimeOfDay;
 
@@ -135,5 +139,6 @@ namespace Repositories.TaxCalculator
 
         }
 
+         
     }
 }

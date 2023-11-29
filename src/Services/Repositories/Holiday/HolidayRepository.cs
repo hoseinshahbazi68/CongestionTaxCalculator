@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Models.Models;
 using Repositories.Base;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Repositories.Holiday
@@ -21,6 +22,6 @@ namespace Repositories.Holiday
         /// گرفتن لیست ساعت ازدحام
         /// </summary>
         /// <returns></returns>
-        public async Task<List<ListHolidayDto>> GetAllAsync() => await TableNoTracking.ProjectTo<ListHolidayDto>(Mapper.ConfigurationProvider).ToListAsync();
+        public async Task<List<ListHolidayDto>> GetAllAsync(CancellationToken cancellation) => await TableNoTracking.ProjectTo<ListHolidayDto>(Mapper.ConfigurationProvider).ToListAsync(cancellation);
     }
 }

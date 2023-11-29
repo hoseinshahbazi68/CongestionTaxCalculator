@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Models.Models;
 using Repositories.Base;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Repositories.City
@@ -21,6 +22,6 @@ namespace Repositories.City
         /// گرفتن لیست ساعت ازدحام
         /// </summary>
         /// <returns></returns>
-        public async Task<List<ListHoursCongestionDto>> GetAllAsync() => await TableNoTracking.ProjectTo<ListHoursCongestionDto>(Mapper.ConfigurationProvider).ToListAsync();
+        public async Task<List<ListHoursCongestionDto>> GetAllAsync(CancellationToken cancellation) => await TableNoTracking.ProjectTo<ListHoursCongestionDto>(Mapper.ConfigurationProvider).ToListAsync(cancellation);
     }
 }
