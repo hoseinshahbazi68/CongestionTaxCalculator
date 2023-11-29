@@ -4,6 +4,17 @@
         <name>CongestionTaxCalculator</name>
     </assembly>
     <members>
+        <member name="T:CongestionTaxCalculator.Controllers.v1.CityConfigController">
+            <summary>
+            تنظیمات شهرها
+             </summary>
+        </member>
+        <member name="M:CongestionTaxCalculator.Controllers.v1.CityConfigController.Get">
+            <summary>
+            گرفتن لیست تنظیمات شهرها
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:CongestionTaxCalculator.Controllers.v1.CityController">
             <summary>
             شهرها
@@ -23,6 +34,28 @@
         <member name="M:CongestionTaxCalculator.Controllers.v1.CongestionTaxCalculatorController.Get(System.Int32)">
             <summary>
             گرفتن مالیات وسایل نقلیه
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:CongestionTaxCalculator.Controllers.v1.HolidayController">
+            <summary>
+            تعطیلات  
+             </summary>
+        </member>
+        <member name="M:CongestionTaxCalculator.Controllers.v1.HolidayController.Get">
+            <summary>
+            گرفتن لیست   تعطیلات
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:CongestionTaxCalculator.Controllers.v1.HoursCongestionController">
+            <summary>
+            ساعت ازدحام  
+             </summary>
+        </member>
+        <member name="M:CongestionTaxCalculator.Controllers.v1.HoursCongestionController.Get">
+            <summary>
+            گرفتن لیست   ساعت ازدحام
             </summary>
             <returns></returns>
         </member>
